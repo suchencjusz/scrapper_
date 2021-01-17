@@ -100,7 +100,8 @@ namespace Scrapper
                             "//html/body/main/div/section/div/div/aside/div/div/div")
                         .InnerHtml;
 
-                    if (status.Length > 50)
+                    //trochę bruh ale działa
+                    if (status.Length < 50)
                         compnToWrite.status = "Dostępny";
                     else
                         compnToWrite.status = "Niedostępny";
