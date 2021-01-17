@@ -19,6 +19,9 @@ namespace Scrapper
         private static int scrapDelay = 10;
         static void Main(string[] args)
         {
+            if (!File.Exists("linki.txt"))
+                File.Create("linki.txt");
+            
             string[] linkstxt = File.ReadAllLines("linki.txt");
             List<string> urls = new List<string>();
             
