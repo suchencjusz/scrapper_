@@ -18,6 +18,7 @@ Oczywiście będę dodawał więcej sklepów... z czasem, ale ty też możesz to
 Po prostu wklejasz linki produktów które cię interesują do pliku `linki.txt` i uruchamiasz program.
 
 ![Plik linki.txt](https://i.ibb.co/wsDYTVh/howto.png) 
+
 Program co kilka sekund będzie sprawdzał czy któryś z tych komponentów jest dostępny i będzie cię o tym informował.
 
 ![enter image description here](https://i.ibb.co/t4S5dVD/howto2.png)
