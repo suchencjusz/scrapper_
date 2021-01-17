@@ -13,8 +13,7 @@ Program obsługuje następujące sklepy:
 Do dodania:
 - hard-pc.pl
 - komputronik.pl
-
-(koniec listy)
+(koniec listy xD)
 
 Oczywiście będę dodawał więcej sklepów... z czasem, ale ty też możesz to zrobić!
 
