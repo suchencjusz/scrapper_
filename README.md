@@ -2,6 +2,8 @@
 Jesteś zażenowany aktualną dostępnością kart graficznych i innych komponentów w sklepach komputerowych?
 Jeśli tak, to dobrze trafiłeś!
 
+![meme](https://i.ibb.co/JKrwgYK/xdxdxdxdxd.jpg)
+
 **PROGRAM MOŻESZ POBRAĆ Z PRAWEJ STRONY ZAKŁADKA RELEASES**
 
 Napisałem prosty ~~cienki~~ program do sprawdzania dostępności różnych komponentów.
@@ -13,8 +15,7 @@ Program obsługuje następujące sklepy:
 Do dodania:
 - hard-pc.pl
 - komputronik.pl
-
-(koniec listy)
+(koniec listy xD)
 
 Oczywiście będę dodawał więcej sklepów... z czasem, ale ty też możesz to zrobić!
 

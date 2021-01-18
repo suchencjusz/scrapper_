@@ -1,0 +1,1 @@
+fajny pomysł mówisz?
