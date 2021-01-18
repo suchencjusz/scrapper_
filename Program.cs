@@ -121,6 +121,8 @@ namespace Scrapper
             {
                 case "powiadom o dostępności":
                     return Color.FromArgb(100,245,0,0);
+                case "wycofany":
+                    return Color.FromArgb(100, 255, 128, 0);
                 case "czasowo niedostępny":
                     return Color.FromArgb(100,245,0,0);
                 case "sprawdź inne produkty":
