@@ -17,8 +17,13 @@ namespace Scrapper
         private int urlIndex = 0;
         static ScrapingBrowser _browser = new ScrapingBrowser();
         private static int scrapDelay = 10;
+        public static string[] availablestatus = {"Dostępny"};
+        
         static void Main(string[] args)
         {
+            EmailSender email = new EmailSender();
+            email.LoadConfig();
+            
             if (!File.Exists("linki.txt"))
                 File.Create("linki.txt");
             
@@ -46,6 +51,16 @@ namespace Scrapper
                     Console.Write(temp.shop + "\t\t", Color.White);
                     Console.Write(temp.status + TabCounter(temp.status), GetColor(temp.status.ToLower()));
                     Console.Write(temp.title + "\t\n", Color.White);
+
+                    //lekki syf
+                    for (int i = 0; i < availablestatus.Length; i++)
+                    {
+                        if(temp.status.ToLower() == availablestatus[i].ToLower())
+                        {
+                            email.SendEmail($"{temp.title} jest dostępny!!!", $"Tak, zgadza się! \n {temp.shop} {temp.title} \t {temp.url}");
+                            i = availablestatus.Length + 2137;
+                        }
+                    }
                 }
                 
                 Console.Title = "Następne sprawdzanie za " + scrapDelay + " sekund";
@@ -102,9 +117,15 @@ namespace Scrapper
 
                     //trochę bruh ale działa
                     if (status.Length < 50)
+                    {
                         compnToWrite.status = "Dostępny";
+                        compnToWrite.available = true;
+                    }
                     else
+                    {
                         compnToWrite.status = "Niedostępny";
+                        compnToWrite.available = false;
+                    }
 
                     compnToWrite.url = url;
                     compnToWrite.shop = "morele";
@@ -144,5 +165,6 @@ namespace Scrapper
         public string status { get; set; }
         public string url { get; set; }
         public string shop { get; set; }
+        public bool available { get; set; }
     }
 }
