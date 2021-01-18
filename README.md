@@ -12,11 +12,6 @@ Program obsługuje następujące sklepy:
 - Morele
 - x-kom
 
-Do dodania:
-- hard-pc.pl
-- komputronik.pl
-(koniec listy xD)
-
 Oczywiście będę dodawał więcej sklepów... z czasem, ale ty też możesz to zrobić!
 
 # Jak się tego używa?
