@@ -23,6 +23,35 @@ Program co kilka sekund będzie sprawdzał czy któryś z tych komponentów jest
 
 ![enter image description here](https://i.ibb.co/t4S5dVD/howto2.png)
 
+# Konfiguracja emaila
+Musisz posiadać konto mailowe (polecam gmaila) oraz zezwolić na mniej bezpieczne aplikacje
+![link](https://myaccount.google.com/lesssecureapps?pli=1&rapt=AEjHL4OWumQQ0Kl4UkZ-zYIvAh7YK87JzIAe8tNNVg_Ibsa_U-srgtTOtr4RLqioRgKJJauK-wO-iCctvh-nPV7J24xFqjAXaQ)
+
+Edytujesz plik `configmail.txt` w następujący sposób:
+
+```
+true
+hasło do konta gmail
+email BEZ DOMENY
+domena np @gmail.com
+email docelowy
+port serwera smtp
+adres serwera smtp
+```
+
+
+Konfiguracja dla gmaila
+
+```
+true
+password
+test
+@gmail.com
+hejka@gmail.com
+587
+smtp.gmail.com
+```
+
 TODO:
 
  - [ ] Więcej sklepów
