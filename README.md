@@ -26,5 +26,5 @@ Program co kilka sekund będzie sprawdzał czy któryś z tych komponentów jest
 TODO:
 
  - [ ] Więcej sklepów
- - [i] Informacja mailowa o dostępnym produkcie
+ - [x] Informacja mailowa o dostępnym produkcie
  - [ ] Proxy (nie wiem czy to będzie potrzebne)
