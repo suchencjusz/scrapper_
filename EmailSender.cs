@@ -40,7 +40,6 @@ namespace Scrapper
                 try
                 {
                     SmtpServer.Send(mail);
-                    Console.WriteLine("xd");
                 }
                 catch (Exception e)
                 {
