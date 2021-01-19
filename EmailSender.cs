@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Mail;
 using Console = Colorful.Console;
 using System.Drawing;
@@ -9,18 +10,28 @@ namespace Scrapper
     public class EmailSender
     {
         private Config Config = new Config();
-        public void SendEmail(string subject, string body)
+        public void SendEmail(string subject, List<string> body)
         {
+            string tempbody = string.Empty;
+            
             if (Config.enabled)
             {
                 MailMessage mail = new MailMessage();
-                SmtpClient SmtpServer = new SmtpClient();
+                SmtpClient SmtpServer = new SmtpClient(Config.smtpserver);
 
                 mail.From = new MailAddress(Config.email + Config.domain);
                 mail.To.Add(Config.emailtarget);
 
                 mail.Subject = subject;
-                mail.Body = body;
+
+                tempbody += "Dostępne produkty: \n";
+                foreach (var t in body)
+                {
+                    tempbody += "\t" + t + "\n";
+                }
+                tempbody += "\n\n scrapper_ 1.0.1";
+                
+                mail.Body = tempbody;
 
                 SmtpServer.Port = Config.port;
                 SmtpServer.Credentials = new System.Net.NetworkCredential(Config.email, Config.password);
@@ -29,6 +40,7 @@ namespace Scrapper
                 try
                 {
                     SmtpServer.Send(mail);
+                    Console.WriteLine("xd");
                 }
                 catch (Exception e)
                 {
@@ -40,25 +52,15 @@ namespace Scrapper
         public void LoadConfig()
         {
             string[] temp = {""};
+            string[] xd =
+            {
+                "info z emailami -> true/false", "password", "email np siema (bez domeny)",
+                "domena np @gmail.com", "email docelowy (twój nie bota)", "port serwera smtp", "adres serwera smtp"
+            };
             
             if (!File.Exists("configmail.txt"))
-            {
-                File.Create("configmail.txt");
-                File.WriteAllLines("configmail.txt",
-                    new string[]
-                    {
-                        "info z emailami -> true/false", "password", "email np siema (bez domeny)",
-                        "domena np @gmail.com", "email docelowy (twój nie bota)", "port serwera smtp"
-                    });
-                File.Create("configmailprzyklad.txt");
-                File.WriteAllLines("configmailprzyklad.txt",
-                    new string[]
-                    {
-                        "true", "xd452", "test",
-                        "@gmail.com", "test@gmail.com", "465"
-                    });
-            }
-
+                File.AppendAllLines("configmail.txt", xd);
+            
             try
             {
                 temp = File.ReadAllLines("configmail.txt");
@@ -69,6 +71,7 @@ namespace Scrapper
                 Config.domain = temp[3];
                 Config.emailtarget = temp[4];
                 Config.port = Convert.ToInt32(temp[5]);
+                Config.smtpserver = temp[6];
             }
             catch (Exception e)
             {
@@ -86,5 +89,6 @@ namespace Scrapper
         public string domain { get; set; }
         public string emailtarget { get; set; }
         public int port { get; set; }
+        public string smtpserver { get; set; }
     }
 }
