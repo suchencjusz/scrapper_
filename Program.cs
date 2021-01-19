@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,14 +17,20 @@ namespace Scrapper
     {
         private int urlIndex = 0;
         static ScrapingBrowser _browser = new ScrapingBrowser();
-        private static int scrapDelay = 10;
+        private static int scrapDelay = 100;
+        public static string availableitemsstatus = "Dostępny";
+        
         static void Main(string[] args)
         {
+            EmailSender email = new EmailSender();
+            email.LoadConfig();
+            
             if (!File.Exists("linki.txt"))
                 File.Create("linki.txt");
             
             string[] linkstxt = File.ReadAllLines("linki.txt");
             List<string> urls = new List<string>();
+            List<string> availableitems = new List<string>();
             
             foreach (var s in linkstxt)
             {
@@ -39,6 +46,8 @@ namespace Scrapper
                 Console.WriteLine($"Załadowałem: {ReadyListToParse.Count} linków/link/linki",Color.Gray);
                 Console.WriteLine();
                 
+                availableitems.Clear();
+                
                 foreach (InfoAboutComponent ToDisplayFromList in ReadyListToParse)
                 {
                     InfoAboutComponent temp = ToDisplayFromList;
@@ -46,7 +55,13 @@ namespace Scrapper
                     Console.Write(temp.shop + "\t\t", Color.White);
                     Console.Write(temp.status + TabCounter(temp.status), GetColor(temp.status.ToLower()));
                     Console.Write(temp.title + "\t\n", Color.White);
+
+                    if (temp.status.ToLower() == availableitemsstatus.ToLower())
+                        availableitems.Add($"{temp.shop} - {temp.title} | {temp.url}");
                 }
+                
+                if(availableitems.Count > 0)
+                    email.SendEmail($"{availableitems.Count}, tyle właśnie produktów jest dostępnych!", availableitems);
                 
                 Console.Title = "Następne sprawdzanie za " + scrapDelay + " sekund";
                 Thread.Sleep(scrapDelay*1000);
@@ -61,7 +76,6 @@ namespace Scrapper
         static List<InfoAboutComponent> GetPageDetails(List<string> urls)
         {
             float tempindex = 0;
-            
             var lstPageDetails = new List<InfoAboutComponent>();
             
             foreach (var url in urls)
@@ -102,9 +116,15 @@ namespace Scrapper
 
                     //trochę bruh ale działa
                     if (status.Length < 50)
+                    {
                         compnToWrite.status = "Dostępny";
+                        compnToWrite.available = true;
+                    }
                     else
+                    {
                         compnToWrite.status = "Niedostępny";
+                        compnToWrite.available = false;
+                    }
 
                     compnToWrite.url = url;
                     compnToWrite.shop = "morele";
@@ -135,7 +155,6 @@ namespace Scrapper
                     return Color.White;
             }
         }
-
         static string TabCounter(string tocount) => tocount.Length < 12 ? "\t\t" : "\t";
     }
     
@@ -144,5 +163,6 @@ namespace Scrapper
         public string status { get; set; }
         public string url { get; set; }
         public string shop { get; set; }
+        public bool available { get; set; }
     }
 }
